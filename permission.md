@@ -10,4 +10,8 @@
         php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
         php artisan optimize:clear
         php artisan migrate
-##
+## CREATE ROLE AND ADMIN SEEDER 
+    - Create a RoleSeeder & AdminSeeder
+            php artisan make:seeder RoleSeeder
+            php artisan make:seeder AdminSeeder
+    -
