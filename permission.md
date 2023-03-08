@@ -250,4 +250,11 @@
 
 ##  EDIT / DELETE ROLES
     - Objectives is to be able to delete the roles.
-    - 
+    - Update the validation 
+    - Put the button on edit / delete , open roles/index file
+    - Add the  Link for Edit
+    -  Create the Edit File , copy create file and save as Edit.vue
+        . define props for roles
+        .continue the rest of logic inn the submit methood and route
+    - Open the RoleController and add logic in edit() , update() and destroy()
+    - Add another link to delete the roles in index page
