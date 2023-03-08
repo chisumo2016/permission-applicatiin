@@ -258,3 +258,13 @@
         .continue the rest of logic inn the submit methood and route
     - Open the RoleController and add logic in edit() , update() and destroy()
     - Add another link to delete the roles in index page
+
+## CREATE PERMISSION 
+    - add the button to create permission
+    - Open the PermissionController  and add logic into create() method  
+    - create the another file Permissions/Create.vue
+    - Open the PermissionController  and add logic into update() method  
+    - Create a Request
+             php artisan make:request CreatePermissionRequest
+    - Apply the request in store method and write the logic to create a permission
+    - TEST UI : PASSED

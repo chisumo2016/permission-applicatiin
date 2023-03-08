@@ -1,6 +1,6 @@
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Permissions" />
 
     <AdminLayout>
         <template #header>
@@ -8,7 +8,10 @@
         </template>
 
         <div class="max-w-7xl  mx-auto py-4">
-            <h1>Permissions Index  </h1>
+            <div class="flex justify-between">
+                <h1>Permission Index  </h1>
+                <Link :href="route('permissions.create')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">New Permission</Link>
+            </div>
             <div class="mt-6">
                 <Table>
                     <template #header>
@@ -22,7 +25,9 @@
                         <TableRow v-for="permission in permissions" :key="permission.id" class="border-b">
                             <TableDataCell>{{ permission.id}}</TableDataCell>
                             <TableDataCell>{{ permission.name }}</TableDataCell>
-                            <TableDataCell>Edit / Delete </TableDataCell>
+                            <TableDataCell>
+
+                            </TableDataCell>
                         </TableRow>
                     </template>
                 </Table>
@@ -32,7 +37,7 @@
 </template>
 
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { Head , Link } from '@inertiajs/vue3';
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 import Table from "@/Components/Table.vue";
