@@ -48,3 +48,59 @@
     - Try to log as user  403 USER DOES NOT HAVE THE RIGHT ROLES.
     - Try to log as admin  access the dashboard
 
+## SHARE ROLES AND PERMISSION
+    - The objectives is to hide the Admin  link if ur normal user.
+    - use the https://inertiajs.com/shared-data
+            'auth.user' => fn () => $request->user()
+                ? $request->user()->only('id', 'name', 'email')
+                : null,
+    - Open the HandleInertiaRequests
+    - Before we code , open the devtool vue
+        prpos ->auth -> user -> return all details
+    - Take this code from doc   replace
+        'auth.user' => fn () => $request->user()
+                ? $request->user()->only('id', 'name', 'email')
+                : null,
+    - reresh the pages
+            props:Object
+                auth:Object
+                user:Object
+                email:"admin@example.com"
+                id:2
+                name:"admin"
+    - Add the user roles and permission in HandleInertiaRequest
+            https://spatie.be/docs/laravel-permission/v5/basic-usage/basic-usage
+            /**Roles*/
+            'auth.user.roles' => fn () => $request->user()
+                ? $request->user()->getRoleNames()
+                : null,
+            /**permission*/
+            'auth.user.permissions' => fn () => $request->user()
+                ? $request->user()->getPermissionNames()
+                : null,
+    - Reload the page , check the Vue DevTools
+                props:Object
+                    auth:Object
+                        user:Object
+                        email:"admin@example.com"
+                        id:2
+                        name:"admin"
+                        permissions:Array[0]
+                        roles:Array[1]
+                                 0:"admin"
+
+    - Accesss the shared data  via usePage()
+    - Open the AuthenticatedLayout.vue and add the roles as admin
+            v-if="$page.props.auth.user.roles.includes('admin')"
+    - Create Composables folder inside js, add new file called permissions.js
+    - create a logic inside the permissions.js file
+    - We can use inside thhe AuthenticatedLayout.vue  and import
+            import {usePermission  } from "@/Composables/permissions"
+    - Destruct the hasRole  in AuthenticatedLayout.vue 
+            const { hasRole} = usePermission();
+    - We can use on navlink
+         v-if="$page.props.auth.user.roles.includes('admin')"
+        TO
+         v-if="hasRole('admin')"
+    - Try again to log as normal user and admin
+    - If you logout , the Dasboard link appeared
