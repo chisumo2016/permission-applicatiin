@@ -248,4 +248,6 @@
              Role::create(['name' => $request->name()]);
     - Test application : Passed
 
-## 
+##  EDIT / DELETE ROLES
+    - Objectives is to be able to delete the roles.
+    - 
