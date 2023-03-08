@@ -229,4 +229,23 @@
     - Create a Resource for Roles and Permissions
             php artisan make:resource RoleResource 
             php artisan make:resource PermissionResource   
-    - Open the RoleController and return resource
+    - Open the RoleController and return RoleResource
+    - Open the PermissiionController and return RoleResource
+
+## CREATE ROLES  
+    - Object  Link to Add/Create Roles 
+    - Open the Roles/index.vue page
+        .Add the Link to navigate to create page
+    - Open RoleController , add the logic inside the create() method , return inertia response 
+    - Create a Roles/Create.vue  , copy index and paste then edit
+    - Add the form , go login.vue file code the form and paste 
+    - Adjust the code according to your requirement
+    - Create the CreateRoleRequest
+            php artisan make:request CreateRoleRequest 
+    - Open the CreateRoleRequest  return the logic
+    - Open the RoleController and use in store()
+        . add the logic inside
+             Role::create(['name' => $request->name()]);
+    - Test application : Passed
+
+## 
