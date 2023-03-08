@@ -27,3 +27,24 @@
     - You can access the admin page via 
             http://permission-application.test/admin
     -
+
+## TAILWINDCSS ADMIN LAYOUT  
+    - Create admin panel 
+    - Add the link for Admin resources/js/Layouts/AuthenticatedLayout.vue
+    -  Copy the Layout from Tailwindcss components
+            https://tailwindcomponents.com/components/layout
+    - Save the AuthentiocatedLayout.vue as AdminLayout.vue
+    - Paste the code  https://tailwindcomponents.com/components/layout
+    - Then in AdminIndex.Vue extends to AdminLayou.vue
+    -  Remove svg inside AdminLayout and add <slot></slot> in container
+    - We want normal user not to be able too access the admin panel
+            https://spatie.be/docs/laravel-permission/v5/basic-usage/middleware
+        . Add to $middlewareAliases  inside the karnel
+            'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+    example
+            Route::group(['auth', middleware' => ['role:name of the role']], function () {
+                //
+            });
+    - Try to log as user  403 USER DOES NOT HAVE THE RIGHT ROLES.
+    - Try to log as admin  access the dashboard
+
