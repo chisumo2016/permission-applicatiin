@@ -152,3 +152,51 @@
            const hasPermission = (name) => usePage().props.auth.user.permissions.includes(name);
     - Reload the page , the name appeared .OK
     - IF WE REGISTER AS NORMAL USER ,LINK OF ADMIN WILL BE HIDE ,OTHERWISE IF YOU LOG AS ADMIN
+
+#### CREATE ROUTES , LINKS AND CONTROLLER 
+    - if you log as admin , we need to see user , role and permission link
+    - Let us create controllers
+              What should the controller be named?  
+        php artisan make:controller
+        ❯ UserController
+        
+        Which type of controller would you like: [empty]
+        empty ....................................................................... 0
+        api ......................................................................... 1
+        invokable ................................................................... 2
+        resource .................................................................... 3
+        singleton ................................................................... 4
+   
+    - Repeat the same process RoleController, PermissionController 
+    - Register the route in web file 
+                Route::resource('/users', UserController::class);
+                Route::resource('/roles', RoleController::class);
+                Route::resource('/permissions', PermissionController::class);
+    - Let open the AdminLayout.vue
+            . Open NavLink.vue and save as SidebarLink
+            . Add the SidebarLink in  AdminLayout.vue
+            . Comment/remove the other li 
+            . create the sideLink for both , users, Roles, Permission
+    - Open the User Controller and add logic in index method
+    - Create  folder inside the pages called Users/Index.vue
+    - Copy the file from AdminIndex.vue and paste to Index.vue
+    - TESK ok
+    -Do the same procedure to all Roles, Permissions
+         NB: RESPONSE TYPE IS INERTIA
+    - Open the Authenticated Layout file 
+             v-if="hasRole('admin')"
+             v-if="hasRole('admin')"
+             :href="route('users.index')"
+             :active="route().current('users.index')">
+             Admin
+    - Purpose of the above code in Authenticated Layout is to navigate to users page 
+    - Work on Logout functionality, open AdminLayout file
+            . logout button , change into Link
+
+                      <Link
+                    :href="route('logout')"
+                    method="post"
+                    as="button" </Link>
+    - Add the color on span of logout and on svg hover:text-red-400
+    - TEST APPLICATION - PASSED
+    

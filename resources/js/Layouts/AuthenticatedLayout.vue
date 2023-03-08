@@ -23,7 +23,8 @@
                                 </NavLink>
                                 <NavLink
                                     v-if="hasRole('admin')"
-                                    :href="route('admin.index')" :active="route().current('admin.index')">
+                                    :href="route('users.index')"
+                                    :active="route().current('users.index')">
                                     Admin
                                 </NavLink>
                             </div>
