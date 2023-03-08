@@ -279,3 +279,16 @@
         .continue the rest of logic inn the submit methood and route
     - Open the PermissionController and add logic in edit() , update() and destroy()
     - Add another link to delete the roles in index page
+
+## CREATE USERS
+    - add the button to create NEW Users
+     - create the another file Users/Create.vue
+     - Copy from Register file and paste into Creata.vue
+    - Open the UserController  and add logic into create() method  
+    - Open the register Conttroller and still some codee in store()
+   
+    - Open the PermissionController  and add logic into update() method  
+    - Create a Request
+             php artisan make:request CreatePermissionRequest
+    - Apply the request in store method and write the logic to create a permission
+    - TEST UI : PASSED
