@@ -268,3 +268,14 @@
              php artisan make:request CreatePermissionRequest
     - Apply the request in store method and write the logic to create a permission
     - TEST UI : PASSED
+
+##  EDIT / DELETE PERMISSIONS
+    - Objectives is to be able to delete the permission.
+    - Update the validation 
+    - Put the button on edit / delete , open roles/index file
+    - Add the  Link for Edit
+    -  Create the Edit File , copy create file and save as Edit.vue
+        . define props for permission
+        .continue the rest of logic inn the submit methood and route
+    - Open the PermissionController and add logic in edit() , update() and destroy()
+    - Add another link to delete the roles in index page
