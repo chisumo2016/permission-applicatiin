@@ -199,4 +199,34 @@
                     as="button" </Link>
     - Add the color on span of logout and on svg hover:text-red-400
     - TEST APPLICATION - PASSED
-    
+
+### DISPLAY USERS , ROLES AND PERMISSIONS
+    - Add the table to display all the users , roles and permissions
+    - Visit https://flowbite.com/docs/components/tables/
+    - We can't add directly on the Index page , we gonna create components
+        . create Table.vue components
+        . Going to create a componentt for tr, th, td
+                TableRow.vue
+                TableHeaderCell.vue
+                TableDataCell.vue
+        . Add the logic based on default Table.vue file
+    - Open tthe Table.vue file and remove the tr and replace with slot
+                <slot name="header"></slot>
+    - In the body of Tablee.vue  remove the td and replace 
+                <slot ></slot>
+    - Open the User Controller inn index() and logic 
+    - Open the Users/Index.vue and defineProps
+            defineProps(['users'])
+        . import the following Users/Index.vue
+                    Table.vue
+                    TableRow.vue
+                    TableHeaderCell.vue
+                    TableDataCell.vue
+    - Loop through tto display the users
+    - Repeat the same procedure to all of Roles/index.vue and Permissions/index.vue
+        .copy from  Users/Index.vue and replace to Roles/Index.vue AND Permissions/index.vue
+        . define the props FOR both
+    - Create a Resource for Roles and Permissions
+            php artisan make:resource RoleResource 
+            php artisan make:resource PermissionResource   
+    - Open the RoleController and return resource
