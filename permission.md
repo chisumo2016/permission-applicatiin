@@ -104,3 +104,51 @@
          v-if="hasRole('admin')"
     - Try again to log as normal user and admin
     - If you logout , the Dasboard link appeared
+
+## CREATE USER RESOURCE 
+    - If you logout , the Dasboard link appeared
+            props:Object
+                auth:Object
+                    user:Object
+                        permissions:null
+                        roles:null
+    - create a user resource
+            php artisan make:resource UserResource 
+    - Open the  user resource aand the logic 
+    - Open the HandleInertiaRequests.php file  and remove roles and permissions
+    - return the created resource  new UserResource($request->user())
+    - Reload the application again , you will see the Login and Register page
+    - Login in again ,showinng error 
+            permissions.js:4 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'includes')
+    - Solution
+            . Open the AuthenticatedLayout.vue and remove v-if
+                v-if="hasRole('admin')"
+            . Dashbaord will be displaying
+            . Vue Tool open
+                    props:Object
+                        auth:Object
+                            user:Object
+                                data:Object
+                                    email:"admin@example.com"
+                                    id:2
+                                    name:"admin"
+                                permissions:Array[0]
+                                 roles:Array[1]
+            . Add the data inside the composables.js
+                    const hasRole       = (name) => usePage().props.auth.user.data.roles.includes(name);
+                     const hasPermission = (name) => usePage().props.auth.user.data.permissions.includes(name);
+            . Activate againn the  v-if="hasRole('admin')" in  AuthenticatedLayout.vue
+            .Test OK
+    - PROBLEM NAME ISNOT SHOWING, solution is beacuse of  user->data 
+       https://laravel.com/docs/10.x/eloquent-resources#data-wrapping
+        . add into app/Providers/AppServiceProvider.php
+            JsonResource::withoutWrapping();
+    - In permissions.js we dont need to add the data
+           const hasRole       = (name) => usePage().props.auth.user.data.roles.includes(name);
+           const hasPermission = (name) => usePage().props.auth.user.data.permissions.includes(name);
+
+                TO
+             const hasRole       = (name) => usePage().props.auth.user.roles.includes(name);
+           const hasPermission = (name) => usePage().props.auth.user.permissions.includes(name);
+    - Reload the page , the name appeared .OK
+    - IF WE REGISTER AS NORMAL USER ,LINK OF ADMIN WILL BE HIDE ,OTHERWISE IF YOU LOG AS ADMIN
