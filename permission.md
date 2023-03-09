@@ -286,9 +286,21 @@
      - Copy from Register file and paste into Creata.vue
     - Open the UserController  and add logic into create() method  
     - Open the register Conttroller and still some codee in store()
-   
-    - Open the PermissionController  and add logic into update() method  
-    - Create a Request
-             php artisan make:request CreatePermissionRequest
-    - Apply the request in store method and write the logic to create a permission
+    - Add the logic in the store 
     - TEST UI : PASSED
+
+##  EDIT / DELETE Users
+    - Objectives is to be able to delete the users.
+    - Add a link tto ge Back to user index
+    - Add the  Link for Edit  / Delete 
+    - Open the UserController and add logic in edit() , update() and destroy()
+    -  Create the Edit File , copy create file and save as Edit.vue
+        . define props for roles
+        . continue the rest of logic inn the submit methood and route
+    - Update the validation 
+    - Put the button on edit / delete , open roles/index file
+    
+    
+    
+    - Add another link to delete the roles in index page
+
