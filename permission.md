@@ -282,19 +282,19 @@
 
 ## CREATE USERS
     - add the button to create NEW Users
-     - create the another file Users/Create.vue
-     - Copy from Register file and paste into Creata.vue
+    - create the another file Users/Create.vue
+    - Copy from Register file and paste into Creata.vue
     - Open the UserController  and add logic into create() method  
     - Open the register Conttroller and still some codee in store()
     - Add the logic in the store 
     - TEST UI : PASSED
 
-##  EDIT / DELETE Users
-    - Objectives is to be able to delete the users.
-    - Add a link tto ge Back to user index
-    - Add the  Link for Edit  / Delete 
+##  EDIT / DELETE USERS
+    - Objectives is to be able to Edit/ delete the users.
+    - Add the link on create.vue file to take back to the Users/indeex.vue file
+    - Add the  Link for Edit  / Delete  by copying the cell from Role/Index.vue 
     - Open the UserController and add logic in edit() , update() and destroy()
-    -  Create the Edit File , copy create file and save as Edit.vue
+    - Create the Edit page  File , copy create file and save as Edit.vue
         . define props for roles
         . continue the rest of logic inn the submit methood and route
     - Update the validation 

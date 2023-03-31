@@ -66,10 +66,11 @@ const  props = defineProps({
         type : Object,
         required: true
     }
-})
+});
+
 const form = useForm({
-    name: props.user.name,
-    email: props.user.email,
+    name: props.user?.name,
+    email: props.user?.email,
 });
 
 const submit = () => {
