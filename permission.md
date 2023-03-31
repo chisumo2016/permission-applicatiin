@@ -299,8 +299,40 @@
         . continue the rest of logic inn the submit methood and route
     - Update the validation 
     - Put the button on edit / delete , open roles/index file
-    
-    
-    
     - Add another link to delete the roles in index page
+
+### ASSIGN PERMISSIONS TO ROLES 
+        https://spatie.be/docs/laravel-permission/v5/basic-usage/role-permissions
+    - Objective is to assign the permissions to the roles
+    - When the user click on edit page on the role , the permission will be populated.
+    - To show the select , assign the permission.
+    - Display all permission inn the table
+    - To completed the task , let search vue multiselect
+        . https://vue-multiselect.js.org/
+        . https://github.com/shentao/vue-multiselect
+            . npm install vue-multiselect
+    - Import the component into Roles/Edit.vue  file
+        import Multiselect from 'vue-multiselect'
+    - Import tthe syles  in Roles/Edit.vue file
+        <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+    - Copy the Multiple select with search
+    - :options="source" will be all the permissions
+        . pass the props in Edit.vue
+                 permissions:Array
+        . pass an array permissions in the formm as array
+    - Open the RoleController and the logic inside the edit()
+        'permissions' => PermissionResource::collection(Permission::all())
+    - The pass the information in the component
+    - Open the CreateRoleRequest and add the permission
+    - Open the update()  method in RoleController
+    - TESTED - OK
+    - Open the Permissions Index.vue and copy the table
+    - Add the permissions relationship in RoleResource
+    - Add the selected permission inn role
+        onMounted(() =>{
+            form.permissions = props.role?.permissions
+        })
+
+    - add mt-6 in create.vue in Role/Create.vue
+        
 
