@@ -1,6 +1,6 @@
 
 <template>
-    <Head title="Create New Role" />
+    <Head title="Create New Post" />
 
     <AdminLayout>
        <template #header>
@@ -9,42 +9,30 @@
 
         <div class="max-w-7xl  mx-auto py-4  bg-slate-100 shadow-lg rounded-lg p-6">
            <div class="flex justify-between">
-               <Link :href="route('roles.index')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">Back</Link>
+               <Link :href="route('posts.index')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">Back</Link>
            </div>
             <div class="mt-6 max-w-6xl mx-auto">
-                <h1 class="text-2xl font-semibold text-indigo-700">Create New Role</h1>
+                <h1 class="text-2xl font-semibold text-indigo-700">Create New Post</h1>
                 <form @submit.prevent="submit">
                     <div class="mt-4">
-                        <InputLabel for="name" value="Name" />
+                        <InputLabel for="title" value="Title" />
 
                         <TextInput
-                            id="name"
+                            id="title"
                             type="text"
                             class="mt-1 block w-full"
-                            v-model="form.name"
+                            v-model="form.title"
                             autofocus
-                            autocomplete="name"
+                            autocomplete="title"
                         />
 
-                        <InputError class="mt-2" :message="form.errors.name" />
+                        <InputError class="mt-2" :message="form.errors.title" />
                     </div>
 
-                    <div class="mt-4">
-                        <InputLabel for="permissions" value="Permissions" />
-                        <VueMultiselect
-                            v-model="form.permissions"
-                            :options="permissions"
-                            :multiple="true"
-                            :close-on-select="true"
-                            placeholder="Pick some"
-                            label="name"
-                            track-by="id"
-                        />
-                    </div>
                     <div class="flex items-center mt-4">
 
                         <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                            Create
+                            Create Post
                         </PrimaryButton>
                     </div>
                 </form>
@@ -61,19 +49,13 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import VueMultiselect from 'vue-multiselect';
-
-defineProps({
-    permissions :Array
-});
 
 const form = useForm({
-    name : "",
-    permissions:[]
+    title : "",
 })
 
 const submit =() =>{
-    form.post(route('roles.store'))
+    form.post(route('posts.store'))
 }
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>
+

@@ -22,9 +22,9 @@
                         </TableRow>
                     </template>
                     <template #default>
-                        <TableRow v-for="post in posts" :key="role.id" class="border-b">
+                        <TableRow v-for="post in posts" :key="post.id" class="border-b">
                             <TableDataCell>{{ post.id}}</TableDataCell>
-                            <TableDataCell>{{ post.name }}</TableDataCell>
+                            <TableDataCell>{{ post.title }}</TableDataCell>
                             <TableDataCell class="space-x-4">
                                 <Link :href="route('posts.edit',  post.id)" class="text-green-400 hover:text-green-600">Edit</Link>
                                 <button class="text-red-400 hover:text-red-600" @click="confirmDeletePost">Delete</button>
@@ -61,7 +61,7 @@ import  DangerButton from  "@/Components/DangerButton.vue";
 import  SecondaryButton from  "@/Components/SecondaryButton.vue";
 
 
-defineProps(["roles"]);
+defineProps({  posts: Array })
 
 const form = useForm({});
 
