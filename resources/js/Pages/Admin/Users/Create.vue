@@ -70,6 +70,30 @@
 
                     <InputError class="mt-2" :message="form.errors.password_confirmation" />
                 </div>
+                <div class="mt-4">
+                    <InputLabel for="roles" value="Roles" />
+                    <VueMultiselect
+                        v-model="form.roles"
+                        :options="roles"
+                        :multiple="true"
+                        :close-on-select="true"
+                        placeholder="Pick some"
+                        label="name"
+                        track-by="id"
+                    />
+                </div>
+                <div class="mt-4">
+                    <InputLabel for="permissions" value="Permissions" />
+                    <VueMultiselect
+                        v-model="form.permissions"
+                        :options="permissions"
+                        :multiple="true"
+                        :close-on-select="true"
+                        placeholder="Pick some"
+                        label="name"
+                        track-by="id"
+                    />
+                </div>
 
                 <div class="flex items-center justify-end mt-4">
 
@@ -92,12 +116,20 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
+import VueMultiselect from 'vue-multiselect';
+
+defineProps({
+    roles: Array,
+    permissions:Array
+})
 const form = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
-    terms: false,
+    roles:[],
+    permissions:[]
+
 });
 
 const submit = () => {
@@ -106,4 +138,6 @@ const submit = () => {
     });
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
 

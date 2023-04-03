@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PermissionResource;
+use App\Http\Resources\RoleResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -11,6 +13,8 @@ use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -29,7 +33,10 @@ class UserController extends Controller
      */
     public function create() : Response
     {
-         return  Inertia::render('Admin/Users/Create');
+         return  Inertia::render('Admin/Users/Create',[
+             'roles'        => RoleResource::collection(Role::all()),
+             'permissions'  => PermissionResource::collection(Permission::all())
+         ]);
     }
 
     /**
@@ -42,11 +49,15 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        User::create([
+
+       $user =  User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $user->syncRoles($request->input('roles.*.name'));
+        $user->syncPermissions($request->input('permissions.*.name'));
 
         return to_route('users.index');
     }
@@ -57,8 +68,12 @@ class UserController extends Controller
      */
     public function edit(User  $user): Response
     {
+        $user->load(['roles' , 'permissions']);
+
         return  Inertia::render('Admin/Users/Edit', [
-            'user' => new UserResource($user)
+            'user' => new UserResource($user),
+            'roles' => RoleResource::collection(Role::all()),
+            'permissions' => PermissionResource::collection(Permission::all())
         ]);
     }
 
@@ -70,6 +85,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|'. Rule::unique('users', 'email')->ignore($user),
+            'roles' => ['sometimes','array'],
+            'permissions' => ['sometimes','array']
         ]);
 
         $user->update([
@@ -77,7 +94,11 @@ class UserController extends Controller
             'email' => $request->email,
         ]);
 
-        return to_route('users.index');
+        $user->syncRoles($request->input('roles.*.name'));
+        $user->syncPermissions($request->input('permissions.*.name'));
+
+        return back();
+        //return to_route('users.index');
     }
 
     /**

@@ -334,5 +334,60 @@
         })
 
     - add mt-6 in create.vue in Role/Create.vue
-        
+
+
+
+## ASSIGN ROLES AND PERMISSION TO THE USERS
+        https://spatie.be/docs/laravel-permission/v5/basic-usage/role-permissions
+    - The objective of this lessson is to assign the permission to users
+    - Open the Roles/Edit.vue file 
+        . copy all of these
+
+                import VueMultiselect from 'vue-multiselect';
+                import Table from "@/Components/Table.vue";
+                import TableRow from "@/Components/TableRow.vue";
+                import TableHeaderCell from "@/Components/TableHeaderCell.vue";
+                import TableDataCell from "@/Components/TableDataCell.vue";
+                import {onMounted, watch} from "vue";
+        . open the edit.vue page in admin/users
+                import the above to here
+                import the stles here
+                add the component VueMultiselect
+        . define the props roles and permission in Users/Edit.vue
+        . add inn the form the roles and peermissions as empty array
+    - Add the roles & permissions  props in the edit() in UserController
+    - TEST  OK
+    - Add the validations 
+    - Create shared user ressource
+        php artisan make:resource UserSharedResource
+    - Open the HandleInertiaRequest.php ,use UserSharedResourc instead of UseRRESOURCE
+    - Open the UserResource and make adjustment
+    - Open the Users/Edit page add the unmounted() and watch()
+
+    - Open UserController change to return back() instead of route_to() in update() mmethod
+    - Let us use the Mult-Select into Users/Create.vue  and styles
+        . define props for roles and permission
+        . add roles :[] and permissions:[] in tthe form
+    - Open tthe UserController and copy this from edit() and paste into create()
+                'roles' => RoleResource::collection(Role::all()),
+                'permissions' => PermissionResource::collection(Permission::all())
+            . TEST APPLICATION BY CLICK NEW  - PASSES
+            . continue into store() assign the User with variable $user
+            . Add the roles and permission in store 
+            . TEST APPLICATION BY CLICK NEW  - PASSES
+    -  To revoke the Roles and Permissions by creating two controllers
+        php artisan make:controller  RemoveRoleFromUserController
+        php artisan make:controller  RevokePermissionFromUserController
+    - Add two web route
+    - Add the web route name on Users/Edit.vue  on revoke 
+    - Add the funtionality in both Controllers to revoke
+    - TEST THE APPLICATION - PASSED
+    - NOTE
+        . We need to update the Roles and Permissions once u delete will not be shown
+        . open the Users/Edit.vue file  and add the logic on watch()
+        . we can add the preserve-scroll on links
+            https://inertiajs.com/links#scroll-preservation
+            
+
+
 
