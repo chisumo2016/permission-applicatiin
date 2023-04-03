@@ -7,4 +7,11 @@
         . Add the ref()
         . Add the showConfirmDeleteUserModel() method
         . Import the Modal , DangerButton , SecondaryButton  from components into Index.vue
-        
+        . Add the method to delete user
+
+## CONFIRMATION DELETE MODAL FOR ROLES AND PERMISSIONS
+    - Objective is to add the Modal for roles and permissions 
+    -  Copy the componentt form user  and paste into Roles/Index.vue
+        import  Modal from  "@/Components/Modal.vue";
+        import  DangerButton from  "@/Components/DangerButton.vue";
+        import  SecondaryButton from  "@/Components/SecondaryButton.vue";

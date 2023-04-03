@@ -27,7 +27,17 @@
                             <TableDataCell>{{ permission.name }}</TableDataCell>
                             <TableDataCell class="space-x-4">
                                 <Link :href="route('permissions.edit',  permission.id)" class="text-green-400 hover:text-green-600">Edit</Link>
-                                <Link :href="route('permissions.destroy', permission.id)" method="DELETE" as="button" class="text-red-400 hover:text-red-600">Delete</Link>
+                                <button class="text-red-400 hover:text-red-600" @click="confirmDeletePermission">Delete</button>
+                                <Modal :show="showConfirmDeletePermissionModel" @close="closeModal">
+                                    <div class="p-6">
+                                        <h2 class="text-lg font-semibold text-slate-800">Are you sure you want to delete this Permission ?</h2>
+                                        <div class="mt-6 flex space-x-4">
+                                            <DangerButton @click="$event => deletePermission(permission.id)">Delete</DangerButton>
+                                            <secondary-button @click="closeModal">Cancel</secondary-button>
+                                        </div>
+                                    </div>
+                                </Modal>
+<!--                                <Link :href="route('permissions.destroy', permission.id)" method="DELETE" as="button" class="text-red-400 hover:text-red-600">Delete</Link>-->
                             </TableDataCell>
                         </TableRow>
                     </template>
@@ -38,14 +48,36 @@
 </template>
 
 <script setup>
-import { Head , Link } from '@inertiajs/vue3';
+import {Head, Link, useForm} from '@inertiajs/vue3';
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-
+import {ref} from "vue";
 import Table from "@/Components/Table.vue";
 import TableRow from "@/Components/TableRow.vue";
 import TableHeaderCell from "@/Components/TableHeaderCell.vue";
 import TableDataCell from "@/Components/TableDataCell.vue";
+import  Modal from  "@/Components/Modal.vue";
+import  DangerButton from  "@/Components/DangerButton.vue";
+import  SecondaryButton from  "@/Components/SecondaryButton.vue";
 
-defineProps(['permissions'])
+
+defineProps(['permissions']);
+
+const form = useForm({});
+
+const showConfirmDeletePermissionModel = ref(false);
+
+const confirmDeletePermission = () =>{
+    showConfirmDeletePermissionModel.value = true
+}
+
+const  closeModal = () =>{
+    showConfirmDeletePermissionModel.value = false
+}
+
+const deletePermission = (id)=> {
+    form.delete(route('permissions.destroy', id),{
+        onSuccess: () => closeModal()
+    })
+}
 </script>
 
