@@ -27,6 +27,11 @@
                                     :active="route().current('users.index')">
                                     Admin
                                 </NavLink>
+                                <NavLink
+                                    :href="route('posts.index')"
+                                    :active="route().current('posts.index')">
+                                    Posts
+                                </NavLink>
                             </div>
                         </div>
 
