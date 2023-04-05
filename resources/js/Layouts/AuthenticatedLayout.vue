@@ -28,6 +28,7 @@
                                     Admin
                                 </NavLink>
                                 <NavLink
+                                    v-if="hasRoles(['admin','moderator','writer'])"
                                     :href="route('posts.index')"
                                     :active="route().current('posts.index')">
                                     Posts
@@ -163,6 +164,6 @@ import {usePermission  } from "@/Composables/permissions"
 const showingNavigationDropdown = ref(false);
 
 //destruct
-const { hasRole} = usePermission();
+const { hasRole , hasRoles} = usePermission();
 </script>
 
